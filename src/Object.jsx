@@ -1,9 +1,11 @@
-import { Float } from '@react-three/drei'
+import { Float, useMask } from '@react-three/drei'
 
 export default function Object(props)
 {
 
     const { position } = props
+
+    const stencil = useMask(1, true)
 
     return <>
 
@@ -16,6 +18,7 @@ export default function Object(props)
                 <meshStandardMaterial
                     color="yellow"
                     wireframe={true}
+                    {...stencil}
                 />
             </mesh>
         </Float>
