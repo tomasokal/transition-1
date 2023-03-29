@@ -26,15 +26,29 @@ export default function Object(props)
 
     return <>
 
-        <mesh castShadow position={position}>
-            <sphereGeometry args={[1, 64, 64]} />
-            <meshPhongMaterial
-                color="yellow"
-                wireframe={true}
-                clipShadows
-                clippingPlanes={[ localPlane ]}
-            />   
-        </mesh>
+        <group>
+
+            <mesh castShadow position={position}>
+                <sphereGeometry args={[1.01, 64, 64]} />
+                <meshPhongMaterial
+                    color="yellow"
+                    clipShadows
+                    clippingPlanes={[ localPlane ]}
+                />   
+            </mesh>
+
+            <mesh castShadow position={position}>
+                <sphereGeometry args={[1, 64, 64]} />
+                <meshPhongMaterial
+                    color="orange"
+                    wireframe={true}
+                    clipShadows
+                />   
+            </mesh>
+
+
+        </group>
+
 
     </>
 }
