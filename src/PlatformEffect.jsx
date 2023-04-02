@@ -18,13 +18,15 @@ export default function Platform(props)
       <mesh position={[ posX, newPosY, posZ ]} >
         <cylinderGeometry args={[2, 2, props.height, 132, 1, true]} />
         <meshPhysicalMaterial 
+          color={[ 1, 1, 5 ]}
           alphaMap={texture}
           transparent={true}
-          roughness={0.05}
-          transmission={1}
+          // roughness={0.55}
+          transmission={0.25}
           thickness={0.05}
           side={THREE.DoubleSide}
           depthWrite={false}
+          toneMapped={false}
         />
       </mesh>
 
