@@ -3,8 +3,8 @@ import Square from './Squares'
 export default function CircleOfSquares()
 {
 
-    const count = 10
-    const radius = 1
+    const count = 7
+    const radius = 10
 
     return <>
     
