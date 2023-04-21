@@ -18,7 +18,9 @@ export default function Experience()
         <ambientLight intensity={0.5} />
         <OrbitControls makeDefault />
 
-        <CircleOfSquares />
+        <CircleOfSquares count={50} radius={10} direction={1} speed={3} />
+        <CircleOfSquares count={46} radius={9} direction={-1} speed={4} />
+        <CircleOfSquares count={42} radius={8} direction={1} speed={5} />
         
         {/* <Platform position={[0, 0, 0]} /> */}
         {/* <PlatformEffect position={[0, 0, 0]} height={1}/> */}
