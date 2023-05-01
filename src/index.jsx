@@ -1,21 +1,27 @@
 import './style.css'
-import ReactDOM from 'react-dom/client'
-import { Canvas } from '@react-three/fiber'
-import Experience from './Experience.jsx'
 
-const root = ReactDOM.createRoot(document.querySelector('#root'))
+import { StrictMode, Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { createRoot } from 'react-dom/client'
+
+import Experience from './Experience'
+
+const root = createRoot(document.querySelector('#root'))
 
 root.render(
-    <Canvas
-        shadows
-        gl={{ localClippingEnabled: true }}
-        camera={ {
-            fov: 45,
-            near: 0.1,
-            far: 200,
-            position: [ 4, 2, 6 ]
-        } }
-    >
-        <Experience />
-    </Canvas>
+    <StrictMode>
+        <Canvas
+            shadows
+            gl={{ localClippingEnabled: true }}
+            camera={ {
+                fov: 45,
+                near: 0.1,
+                far: 100,
+                position: [ 0, 15, 20 ]
+            } }>
+            <Suspense fallback={null}>
+                <Experience />
+            </Suspense>  
+        </Canvas>
+    </StrictMode>
 )
