@@ -1,17 +1,51 @@
-import { MeshWobbleMaterial } from '@react-three/drei'
+import { Float } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useEffect } from 'react'
 import * as THREE from 'three'
-import { lerp } from 'three/src/math/MathUtils'
 
-function ItemCube()
+function ItemCube({ shape })
 {
+
+    const planeHeightLayerOne = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 2 )
+    const planeHeightLayerTwo = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -4 )
+
+    useFrame((state, delta) => {
+
+        if (shape === 'cube')
+        {
+            planeHeightLayerOne.constant += delta * 5
+            planeHeightLayerTwo.constant += delta * 5
+        } else
+        {
+            planeHeightLayerOne.constant = 2
+            planeHeightLayerTwo.constant = -4
+        }
+
+    })
+
     return <>
     
-        <mesh>
-            <boxBufferGeometry />
-            <MeshWobbleMaterial color={"#00FF00"} speed={2} factor={0.6} />
-        </mesh> 
+        <group position={[ 0, 5, 0 ]}>
+
+            <mesh castShadow>
+                <boxGeometry args={[6.025, 6.025, 6.025]} />
+                <meshPhongMaterial
+                    color="yellow"
+                    clipShadows
+                    clippingPlanes={[ planeHeightLayerTwo ]}
+                />   
+            </mesh>
+
+            <mesh castShadow>
+                <boxGeometry args={[6, 6, 6]} />
+                <meshPhongMaterial
+                    color="orange"
+                    wireframe={true}
+                    clipShadows
+                    clippingPlanes={[ planeHeightLayerOne ]}
+                />   
+            </mesh>
+
+        </group>
     
     </>
     
@@ -20,29 +54,29 @@ function ItemCube()
 function ItemSphere({ shape })
 {
 
-    const planeHeightLayerOne = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -3 )
-    const planeHeightLayerTwo = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -9 )
+    const planeHeightLayerOne = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 2 )
+    const planeHeightLayerTwo = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -4 )
 
     useFrame((state, delta) => {
 
         if (shape === 'sphere')
         {
-            planeHeightLayerOne.constant += delta * 4
-            planeHeightLayerTwo.constant += delta * 4
+            planeHeightLayerOne.constant += delta * 5
+            planeHeightLayerTwo.constant += delta * 5
         } else
         {
-            planeHeightLayerOne.constant = -3
-            planeHeightLayerTwo.constant = -9
+            planeHeightLayerOne.constant = 2
+            planeHeightLayerTwo.constant = -4
         }
 
     })
 
     return <>
     
-        <group>
+        <group position={[ 0, 5, 0 ]}>
 
             <mesh castShadow>
-                <sphereGeometry args={[3.1, 64, 64]} />
+                <sphereGeometry args={[3.025, 64, 64]} />
                 <meshPhongMaterial
                     color="yellow"
                     clipShadows
@@ -66,14 +100,50 @@ function ItemSphere({ shape })
     
 }
 
-function ItemPyramid()
+function ItemPyramid({ shape })
 {
+
+    const planeHeightLayerOne = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 2 )
+    const planeHeightLayerTwo = new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -4 )
+
+    useFrame((state, delta) => {
+
+        if (shape === 'pyramid')
+        {
+            planeHeightLayerOne.constant += delta * 5
+            planeHeightLayerTwo.constant += delta * 5
+        } else
+        {
+            planeHeightLayerOne.constant = 2
+            planeHeightLayerTwo.constant = -4
+        }
+
+    })
+
     return <>
     
-        <mesh>
-            <coneBufferGeometry />
-            <MeshWobbleMaterial color={"#00FF00"} speed={2} factor={0.6} />
-        </mesh> 
+        <group position={[ 0, 5, 0 ]}>
+
+            <mesh castShadow>
+                <sphereGeometry args={[3.025, 64, 64]} />
+                <meshPhongMaterial
+                    color="yellow"
+                    clipShadows
+                    clippingPlanes={[ planeHeightLayerTwo ]}
+                />   
+            </mesh>
+
+            <mesh castShadow>
+                <sphereGeometry args={[3, 64, 64]} />
+                <meshPhongMaterial
+                    color="orange"
+                    wireframe={true}
+                    clipShadows
+                    clippingPlanes={[ planeHeightLayerOne ]}
+                />   
+            </mesh>
+
+        </group>
     
     </>
     
@@ -84,9 +154,11 @@ export default function Item({ shape })
 
     return <>
 
-        {shape === "cube" && <ItemCube />}
-        {shape === "sphere" && <ItemSphere shape={shape} />}
-        {shape === "pyramid" && <ItemPyramid />}
+        <Float>
+            {shape === "cube" && <ItemCube shape={shape} />}
+            {shape === "sphere" && <ItemSphere shape={shape} />}
+            {shape === "pyramid" && <ItemPyramid shape={shape} />}
+        </Float>
     
     </>
 
