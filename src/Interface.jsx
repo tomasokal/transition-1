@@ -9,8 +9,8 @@ export default function Interface({ shape, setShape })
             as='div'
             center
         >
-            <button onClick={() => setShape('cube')}>Cube</button>
             <button onClick={() => setShape('sphere')}>Sphere</button>
+            <button onClick={() => setShape('torus')}>Torus</button>
             <button onClick={() => setShape('pyramid')}>Pyramid</button>
         </Html>
 
